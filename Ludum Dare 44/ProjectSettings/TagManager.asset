@@ -8,6 +8,9 @@ TagManager:
   - characters
   - DialogueCanvas
   - DialogueTrigger
+  - bullet
+  - magic
+  - ring
   layers:
   - Default
   - TransparentFX

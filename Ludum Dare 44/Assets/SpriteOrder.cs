@@ -13,12 +13,15 @@ public class SpriteOrder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpriteRenderer[] renderers = FindObjectsOfType<SpriteRenderer>();
+        Order[] renderers = FindObjectsOfType<Order>();
 
-        foreach(SpriteRenderer renderer in renderers)
+        foreach(Order renderer in renderers)
         {
-            if(renderer.sortingLayerName == "Player")
-            renderer.sortingOrder = (int)(renderer.transform.position.y * -100);
+            var sprs = renderer.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer s in sprs)
+            {
+                s.sortingOrder = (int)(renderer.transform.position.y * -100);
+            }
         }
     }
 }

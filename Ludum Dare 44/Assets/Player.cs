@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     private Animator animator;
     public int health = 5;
     public GameObject following;
+    public GameObject magic;
+    public Transform magicpos;
+    public GameObject ring;
 
     void Start()
     {
@@ -22,24 +25,46 @@ public class Player : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") > 0.5f)
             {
                 transform.Translate(Vector2.right * Time.deltaTime * speed);
+                animator.SetBool("moving", true);
             }
             if (Input.GetAxisRaw("Horizontal") < -0.5f)
             {
                 transform.Translate(Vector2.left * Time.deltaTime * speed);
+                animator.SetBool("moving", true);
             }
-
             if (Input.GetAxisRaw("Vertical") > 0.5f)
             {
                 transform.Translate(Vector2.up * Time.deltaTime * speed);
+                animator.SetBool("moving", true);
             }
             if (Input.GetAxisRaw("Vertical") < -0.5f)
             {
                 transform.Translate(Vector2.down * Time.deltaTime * speed);
+                animator.SetBool("moving", true);
+            }
+            if (Input.GetAxisRaw("Vertical") > -0.5f && Input.GetAxisRaw("Vertical") < 0.5f && 
+                Input.GetAxisRaw("Horizontal") > -0.5f && Input.GetAxisRaw("Horizontal") < 0.5f)
+            {
+                animator.SetBool("moving", false);
             }
 
-            if (Input.GetButtonDown("Attack"))
+            if (Input.GetButtonDown("Attack") && gameObject.name == "Adam")
             {
                 animator.Play("hit");
+            }
+
+            if (Input.GetButtonDown("Attack") && gameObject.name == "Benny")
+            {
+                Magic();
+            }
+
+            if (Input.GetButtonDown("Attack") && gameObject.name == "Mel")
+            {
+                ring.SetActive(true);
+            }
+            if (Input.GetButtonUp("Attack") && gameObject.name == "Mel")
+            {
+                ring.SetActive(false);
             }
         }
 
@@ -48,11 +73,26 @@ public class Player : MonoBehaviour
             float distance = Vector3.Distance(transform.position, following.transform.position);
             if (distance > 1.5f)
             {
+                animator.SetBool("moving", true);
                 float step = speed * Time.deltaTime;
 
                 transform.position = Vector2.MoveTowards(transform.position, following.transform.position, step);
             }
+            else
+            {
+                animator.SetBool("moving", false);
+            }
         }
+    }
+
+    void Magic()
+    {
+        GameObject b = Instantiate(magic, magicpos.position, new Quaternion());
+        Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - b.transform.position;
+        diff.Normalize();
+
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        b.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -78,6 +118,27 @@ public class Player : MonoBehaviour
         {
             PlayerPrefs.SetInt("Medal Of Life", 1);
             Destroy(gameObject);
+        }
+
+        if (collision.gameObject.name == "Crystal Of Blood")
+        {
+            PlayerPrefs.SetInt("Medal Of Life", 1);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.name == "OpenBarsTrigger")
+        {
+            GameObject.Find("BarsTriggered").GetComponent<Animator>().Play("slide");
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "bullet")
+        {
+            health -= 1;
+            Destroy(collision.gameObject);
         }
     }
 }
