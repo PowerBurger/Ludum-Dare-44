@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Transform player;
+    public Transform player;
     public int health;
     SpriteRenderer sp;
-    void Awake()
+    void Start()
     {
-        player = GameObject.Find("Player").transform;
-        sp = GetComponent<SpriteRenderer>();
+        player = GameObject.Find("Player1").transform;
+        sp = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float step = 2 * Time.deltaTime;
+        float distance = Vector3.Distance(transform.position, player.position);
+        if (distance < 15)
+        {
+            float step = 2 * Time.deltaTime;
 
-        transform.position = Vector2.MoveTowards(transform.position, player.position, step);
-
+            transform.position = Vector2.MoveTowards(transform.position, player.position, step);
+        }
         if(health <= 0)
         {
+            print("die!");
             Destroy(gameObject);
         }
     }

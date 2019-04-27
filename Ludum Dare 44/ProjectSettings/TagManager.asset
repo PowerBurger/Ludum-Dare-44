@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - slot
+  - characters
+  - DialogueCanvas
+  - DialogueTrigger
   layers:
   - Default
   - TransparentFX
@@ -13,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 
@@ -38,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 1387932239
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -49,4 +56,7 @@ TagManager:
     locked: 0
   - name: FrontWall
     uniqueID: 3619677147
+    locked: 0
+  - name: UI
+    uniqueID: 2466704009
     locked: 0

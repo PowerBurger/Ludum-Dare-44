@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public float speed;
     private Animator animator;
     public int health = 5;
+    public GameObject following;
 
     void Start()
     {
@@ -16,27 +17,67 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetAxisRaw("Horizontal") > 0.5f)
+        if (following == null)
         {
-            transform.Translate(Vector2.right * Time.deltaTime * speed);
-        }
-        if (Input.GetAxisRaw("Horizontal") < -0.5f)
-        {
-            transform.Translate(Vector2.left * Time.deltaTime * speed);
+            if (Input.GetAxisRaw("Horizontal") > 0.5f)
+            {
+                transform.Translate(Vector2.right * Time.deltaTime * speed);
+            }
+            if (Input.GetAxisRaw("Horizontal") < -0.5f)
+            {
+                transform.Translate(Vector2.left * Time.deltaTime * speed);
+            }
+
+            if (Input.GetAxisRaw("Vertical") > 0.5f)
+            {
+                transform.Translate(Vector2.up * Time.deltaTime * speed);
+            }
+            if (Input.GetAxisRaw("Vertical") < -0.5f)
+            {
+                transform.Translate(Vector2.down * Time.deltaTime * speed);
+            }
+
+            if (Input.GetButtonDown("Attack"))
+            {
+                animator.Play("hit");
+            }
         }
 
-        if (Input.GetAxisRaw("Vertical") > 0.5f)
+        if(following != null)
         {
-            transform.Translate(Vector2.up * Time.deltaTime * speed);
+            float distance = Vector3.Distance(transform.position, following.transform.position);
+            if (distance > 1.5f)
+            {
+                float step = speed * Time.deltaTime;
+
+                transform.position = Vector2.MoveTowards(transform.position, following.transform.position, step);
+            }
         }
-        if (Input.GetAxisRaw("Vertical") < -0.5f)
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "DialogueTrigger")
         {
-            transform.Translate(Vector2.down * Time.deltaTime * speed);
+            collision.gameObject.GetComponent<DialogueTrigger>().TriggerDialogue();
         }
 
-        if(Input.GetButtonDown("Attack"))
+        if (collision.gameObject.name == "SoulCollector")
         {
-            animator.Play("hit");
+            collision.GetComponent<SoulCollector>().OpenBars();
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.name == "Stone Of Mana")
+        {
+            PlayerPrefs.SetInt("Stone Of Mana", 1);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.name == "Medal Of Life")
+        {
+            PlayerPrefs.SetInt("Medal Of Life", 1);
+            Destroy(gameObject);
         }
     }
 }
