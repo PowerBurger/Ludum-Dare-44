@@ -163,8 +163,11 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == "bullet")
         {
-            Health.health -= 1;
-            Destroy(collision.gameObject);
+            if (GetComponent<Player>().following == null)
+            {
+                Health.health -= 1;
+                Destroy(collision.gameObject);
+            }
         }
     }
 }

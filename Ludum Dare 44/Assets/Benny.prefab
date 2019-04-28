@@ -62,6 +62,7 @@ MonoBehaviour:
   magic: {fileID: 989297619602350774, guid: faf4042677bc216469be2048e54f0526, type: 3}
   magicpos: {fileID: 7770808080639540282}
   ring: {fileID: 0}
+  hair: {fileID: 0}
 --- !u!58 &730402662558820555
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -139,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTalking: 0
   moveToX: 0
-  npcName: Player2
+  npcName: Benny
   nameColor: {r: 0, g: 0, b: 0, a: 0}
   voiceCount: 0
   bubbleHigher: 0

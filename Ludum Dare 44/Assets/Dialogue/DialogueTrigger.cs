@@ -21,7 +21,7 @@ public class DialogueTrigger : MonoBehaviour {
         //}
 
 
-        FindObjectOfType<GlobalDialogueManager>().StartDialogue(s, GameObject.Find("Player1"));
+        FindObjectOfType<GlobalDialogueManager>().StartDialogue(s, GameObject.Find("Adam"));
 
         Destroy(gameObject);
     }

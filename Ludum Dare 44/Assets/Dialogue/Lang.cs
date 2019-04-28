@@ -85,14 +85,14 @@ public static class Lang
     {
         beginconv("TollManIntro", true);
         say("TollManIntro", "The Toll Man", "Hey, kiddos. Looks like you wanna get past here.");
-        say("TollManIntro", "Player1", "Uhhh, <i>yeah.");
+        say("TollManIntro", "Adam", "Uhhh, <i>yeah.");
         say("TollManIntro", "The Toll Man", "Well, hand over the money and I'll open up for ya.");
-        say("TollManIntro", "Player2", "M-m-money?");
-        say("TollManIntro", "Player1", "Yeah, we ain't got any.");
+        say("TollManIntro", "Benny", "M-m-money?");
+        say("TollManIntro", "Adam", "Yeah, we ain't got any.");
         say("TollManIntro", "The Toll Man", "Well, in that case...");
         say("TollManIntro", "The Toll Man", "<size=130%>YOUR SOUL WILL DO JUST FINE!");
         say("TollManIntro", "The Toll Man", "<size=130%>WELL, WHO'S IT GONNA BE?");
-        say("TollManIntro", "Player1", "Not me! Hey, you do it.");
+        say("TollManIntro", "Adam", "Not me! Hey, little kid, you do it.");
 
         started = true;
     }

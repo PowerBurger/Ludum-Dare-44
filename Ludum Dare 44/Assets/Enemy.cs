@@ -113,8 +113,10 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "characters")
         {
-            print("diiiie");
-            Health.health -= 1;
+            if (collision.gameObject.GetComponent<Player>().following == null)
+            {
+                Health.health -= 1;
+            }
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

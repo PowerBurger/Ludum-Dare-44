@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Order : MonoBehaviour
 {
+    public bool order = true;
     public int ogOrder;
     // Start is called before the first frame update
     void Awake()
