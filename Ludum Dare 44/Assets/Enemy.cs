@@ -6,14 +6,20 @@ public class Enemy : MonoBehaviour
 {
     public Transform player;
     public float health;
-    SpriteRenderer sp;
+    SpriteRenderer[] sp;
     public GameObject bullet;
     public bool canShoot;
     float bulletTimer;
+    bool activated;
     void Start()
     {
         player = GameObject.Find("Adam").transform;
-        sp = GetComponentInChildren<SpriteRenderer>();
+        
+    }
+
+    public void Activate()
+    {
+        activated = true;
     }
 
     // Update is called once per frame
@@ -21,18 +27,26 @@ public class Enemy : MonoBehaviour
     {
         if(player == null)
         {
-            var players = GameObject.FindGameObjectsWithTag("characters");
-
-            foreach (GameObject p in players)
+            try
             {
-                if (p.GetComponent<Player>().following == null)
+                var players = GameObject.FindGameObjectsWithTag("characters");
+
+                foreach (GameObject p in players)
                 {
-                    player = p.transform;
+                    if (p.GetComponent<Player>().following == null)
+                    {
+                        player = p.transform;
+                        print("found " + p.name);
+                    }
                 }
             }
+            catch
+            {
+                print("found noone");
+            }
         }
-        float distance = Vector3.Distance(transform.position, player.position);
-        if (distance < 15)
+        //float distance = Vector3.Distance(transform.position, player.position);
+        if (activated)
         {
             float step = 2 * Time.deltaTime;
 
@@ -42,17 +56,24 @@ public class Enemy : MonoBehaviour
         }
         if (canShoot)
         {
-            bulletTimer -= Time.deltaTime;
-
-            if (bulletTimer <= 0)
+            if (activated)
             {
-                Shoot();
-                bulletTimer = 2;
+
+                bulletTimer -= Time.deltaTime;
+
+                if (bulletTimer <= 0)
+                {
+                    Shoot();
+                    bulletTimer = 2;
+                }
             }
         }
         if (health <= 0)
         {
-            print("die!");
+            if(gameObject.name == "Boss")
+            {
+                GameObject.Find("Boulder").GetComponent<Boulder>().enabled = true;
+            }
             Destroy(gameObject);
         }
     }
@@ -75,16 +96,25 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Flash());
         }
 
-        if (collision.gameObject.name == "Player")
-        {
-            collision.gameObject.GetComponent<Player>().health -= 1;
-        }
-
-        if (collision.gameObject.tag == "magic")
+        if (collision.gameObject.name == "hair")
         {
             health -= 1;
+            StartCoroutine(Flash());
+        }
+        if (collision.gameObject.tag == "magic")
+        {
+            health -= 0.5f;
             Destroy(collision.gameObject);
             StartCoroutine(Flash());
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "characters")
+        {
+            print("diiiie");
+            Health.health -= 1;
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -98,8 +128,16 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Flash()
     {
-        sp.color = Color.red;
+        sp = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer s in sp)
+        {
+            s.color = Color.red;
+            print(s.name);
+        }
         yield return new WaitForSeconds(0.1f);
-        sp.color = Color.white;
+        foreach (SpriteRenderer s in sp)
+        {
+            s.color = Color.white;
+        }
     }
 }

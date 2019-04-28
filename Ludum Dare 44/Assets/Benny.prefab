@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7162774053381823360}
   - component: {fileID: 3902311943070815846}
   m_Layer: 8
-  m_Name: Player2
+  m_Name: Benny
   m_TagString: characters
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730402662558820558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.09999, y: 66.33999, z: 0}
+  m_LocalPosition: {x: -16.315857, y: -18.584515, z: 0}
   m_LocalScale: {x: 0.912, y: 1.14, z: 1.14}
   m_Children:
   - {fileID: 2068270477735801089}
@@ -61,6 +61,7 @@ MonoBehaviour:
   following: {fileID: 0}
   magic: {fileID: 989297619602350774, guid: faf4042677bc216469be2048e54f0526, type: 3}
   magicpos: {fileID: 7770808080639540282}
+  ring: {fileID: 0}
 --- !u!58 &730402662558820555
 CircleCollider2D:
   m_ObjectHideFlags: 0

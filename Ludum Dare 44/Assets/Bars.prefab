@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1313632652340766067}
   - component: {fileID: 3647950258030027532}
+  - component: {fileID: 5352776519584920314}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -79,46 +80,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &7229143181965135136
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7229143181965135141}
-  - component: {fileID: 4956767663338851161}
-  - component: {fileID: 4956767663338851160}
-  m_Layer: 0
-  m_Name: Bars
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7229143181965135141
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7229143181965135136}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.69, y: 46.97, z: 0}
-  m_LocalScale: {x: 0.22035816, y: 0.22035816, z: 0.22035816}
-  m_Children:
-  - {fileID: 1313632652340766067}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4956767663338851161
+--- !u!61 &5352776519584920314
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7229143181965135136}
+  m_GameObject: {fileID: 1313632652340766070}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -138,6 +106,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16.061499, y: 17.771635}
   m_EdgeRadius: 0
+--- !u!1 &7229143181965135136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7229143181965135141}
+  - component: {fileID: 4956767663338851160}
+  m_Layer: 0
+  m_Name: Bars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7229143181965135141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7229143181965135136}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.69, y: 46.97, z: 0}
+  m_LocalScale: {x: 0.22036, y: 0.22036, z: 0.22036}
+  m_Children:
+  - {fileID: 1313632652340766067}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4956767663338851160
 Animator:
   serializedVersion: 3

@@ -79,6 +79,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3341073645398968175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9118355131614262316}
+  - component: {fileID: 1918810810898651072}
+  m_Layer: 0
+  m_Name: range
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9118355131614262316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3341073645398968175}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99998474, y: 0.99998474, z: 0.99998474}
+  m_Children: []
+  m_Father: {fileID: 6793150981694431085}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1918810810898651072
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3341073645398968175}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.000042906762}
+  serializedVersion: 2
+  m_Radius: 111.00239
 --- !u!1 &6793150981694431087
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +139,7 @@ GameObject:
   - component: {fileID: 150334845}
   - component: {fileID: 150334841}
   - component: {fileID: 3171646194586248515}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +158,7 @@ Transform:
   m_LocalScale: {x: 0.13336204, y: 0.13336204, z: 0.13336204}
   m_Children:
   - {fileID: 1188720815225032077}
+  - {fileID: 9118355131614262316}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -163,7 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a23900767642f4aa2f498350fb49b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   health: 4
+  bullet: {fileID: 0}
+  canShoot: 0
 --- !u!95 &3171646194586248515
 Animator:
   serializedVersion: 3

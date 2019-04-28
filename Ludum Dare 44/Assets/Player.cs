@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     public GameObject magic;
     public Transform magicpos;
     public GameObject ring;
+    public GameObject hair;
 
     void Start()
     {
@@ -62,13 +64,13 @@ public class Player : MonoBehaviour
             {
                 ring.SetActive(true);
             }
-            if (Input.GetButtonUp("Attack") && gameObject.name == "Mel")
-            {
-                ring.SetActive(false);
-            }
+        }
+        if (Input.GetButtonUp("Attack") && gameObject.name == "Mel")
+        {
+            ring.SetActive(false);
         }
 
-        if(following != null)
+        if (following != null)
         {
             float distance = Vector3.Distance(transform.position, following.transform.position);
             if (distance > 1.5f)
@@ -95,6 +97,12 @@ public class Player : MonoBehaviour
         b.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 
+    IEnumerator Ending()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Title Screen");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "DialogueTrigger")
@@ -110,26 +118,44 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.name == "Stone Of Mana")
         {
-            PlayerPrefs.SetInt("Stone Of Mana", 1);
-            Destroy(gameObject);
+            //PlayerPrefs.SetInt("Stone Of Mana", 1);
+            Destroy(collision.gameObject);
+            GameObject.Find("Stone Gate").GetComponent<StoneGate>().Activate("mana");
         }
 
         if (collision.gameObject.name == "Medal Of Life")
         {
-            PlayerPrefs.SetInt("Medal Of Life", 1);
-            Destroy(gameObject);
+            //PlayerPrefs.SetInt("Medal Of Life", 1);
+            Destroy(collision.gameObject);
+            GameObject.Find("Stone Gate").GetComponent<StoneGate>().Activate("life");
         }
 
         if (collision.gameObject.name == "Crystal Of Blood")
         {
-            PlayerPrefs.SetInt("Medal Of Life", 1);
-            Destroy(gameObject);
+            //PlayerPrefs.SetInt("Crystal Of Blood", 1);
+            Destroy(collision.gameObject);
+            GameObject.Find("Stone Gate").GetComponent<StoneGate>().Activate("blood");
         }
 
         if (collision.gameObject.name == "OpenBarsTrigger")
         {
             GameObject.Find("BarsTriggered").GetComponent<Animator>().Play("slide");
-            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.name == "range")
+        {
+            collision.gameObject.GetComponentInParent<Enemy>().Activate();
+        }
+
+        if (collision.gameObject.name == "Boulder")
+        {
+            StartCoroutine(Ending());
+        }
+
+        if (collision.gameObject.tag == "checkpoint")
+        {
+            Health.lastCheckpoint = collision.gameObject.transform;
         }
     }
 
@@ -137,7 +163,7 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == "bullet")
         {
-            health -= 1;
+            Health.health -= 1;
             Destroy(collision.gameObject);
         }
     }
