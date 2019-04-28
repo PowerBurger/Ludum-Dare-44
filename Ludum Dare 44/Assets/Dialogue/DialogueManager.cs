@@ -105,6 +105,11 @@ public class DialogueManager : MonoBehaviour {
     //IEnumerator TypeSentence (string sentence)
     IEnumerator TypeSentence (sent sentence)
 	{
+        if(sentence.whatsays == "Not me! Hey, little kid, you do it.")
+        {
+            GameObject.Find("Baby").GetComponent<Animator>().Play("into");
+            GameObject.Find("BarsBeginning").GetComponent<Animator>().Play("slide");
+        }
         //previousSpeaker.GetComponent<Animator>().SetBool("isTalking", true);
         nameText.text = sentence.whosays;
         dialogueText.text = "";
@@ -322,11 +327,11 @@ public class DialogueManager : MonoBehaviour {
 
             if (!command && !tag)
             {
-                yield return new WaitForSeconds(0.03f);
+                yield return new WaitForSeconds(0.02f);
                 //wait more if punctuation
                 if(letter == '.' || letter == '!')
                 {
-                    yield return new WaitForSeconds(0.4f);
+                    yield return new WaitForSeconds(0.15f);
                 }
             }
             if (letter == '>')

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    float lifetime;
     //Transform target;
     // Start is called before the first frame update
     void Awake()
@@ -23,7 +24,12 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        lifetime += Time.deltaTime;
 
+        if(lifetime >= 5)
+        {
+            Destroy(gameObject);
+        }
 
         transform.Translate(Vector2.up * Time.deltaTime * 20);
     }

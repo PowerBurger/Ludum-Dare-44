@@ -12,6 +12,7 @@ TagManager:
   - magic
   - ring
   - checkpoint
+  - dungeon
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Player
   - Attack
   - Enemy
-  - 
+  - Noenemy
   - 
   - 
   - 

@@ -93,17 +93,20 @@ public class Enemy : MonoBehaviour
         if(collision.gameObject.name == "Sword")
         {
             health -= 1;
+            FindObjectOfType<AudioManager>().Play("enemy");
             StartCoroutine(Flash());
         }
 
         if (collision.gameObject.name == "hair")
         {
             health -= 1;
+            FindObjectOfType<AudioManager>().Play("enemy");
             StartCoroutine(Flash());
         }
         if (collision.gameObject.tag == "magic")
         {
             health -= 0.5f;
+            FindObjectOfType<AudioManager>().Play("enemy");
             Destroy(collision.gameObject);
             StartCoroutine(Flash());
         }
@@ -116,6 +119,7 @@ public class Enemy : MonoBehaviour
             if (collision.gameObject.GetComponent<Player>().following == null)
             {
                 Health.health -= 1;
+                FindObjectOfType<AudioManager>().Play("hurt");
             }
         }
     }
@@ -124,6 +128,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "ring")
         {
             health -= Time.deltaTime * 3;
+            FindObjectOfType<AudioManager>().Play("enemy");
             StartCoroutine(Flash());
         }
     }

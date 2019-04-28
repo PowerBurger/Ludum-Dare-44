@@ -18,13 +18,13 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "characters")
         {
             spawnTimer += Time.deltaTime;
 
-            if(spawnTimer >= 3)
+            if(spawnTimer >= 10)
             {
                 Vector2 h = new Vector2(collision.gameObject.transform.position.x + Random.Range(-15, 15), collision.gameObject.transform.position.y + Random.Range(-15, 15));
                 Instantiate(pre, h, new Quaternion());

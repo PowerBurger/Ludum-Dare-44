@@ -50,19 +50,29 @@ public class Player : MonoBehaviour
                 animator.SetBool("moving", false);
             }
 
-            if (Input.GetButtonDown("Attack") && gameObject.name == "Adam")
+            if (FindObjectOfType<GlobalDialogueManager>().isTalking == false)
             {
-                animator.Play("hit");
-            }
+                if (Input.GetButtonDown("Attack") && gameObject.name == "Adam")
+                {
+                    animator.Play("hit");
+                    FindObjectOfType<AudioManager>().Play("swoosh");
+                }
 
-            if (Input.GetButtonDown("Attack") && gameObject.name == "Benny")
-            {
-                Magic();
-            }
+                if (Input.GetButtonDown("Attack") && gameObject.name == "Benny")
+                {
+                    Magic();
+                    FindObjectOfType<AudioManager>().Play("magic");
+                }
 
-            if (Input.GetButtonDown("Attack") && gameObject.name == "Mel")
-            {
-                ring.SetActive(true);
+                if (Input.GetButtonDown("Attack") && gameObject.name == "Mel")
+                {
+                    ring.SetActive(true);
+                    FindObjectOfType<AudioManager>().Play("ringup");
+                }
+                if (Input.GetButtonUp("Attack") && gameObject.name == "Mel")
+                {
+                    FindObjectOfType<AudioManager>().Play("ringdown");
+                }
             }
         }
         if (Input.GetButtonUp("Attack") && gameObject.name == "Mel")
@@ -86,6 +96,15 @@ public class Player : MonoBehaviour
             }
         }
     }
+    void Walk1()
+    {
+        FindObjectOfType<AudioManager>().Play("walk1");
+    }
+
+    void Walk2()
+    {
+        FindObjectOfType<AudioManager>().Play("walk2");
+    }
 
     void Magic()
     {
@@ -103,9 +122,30 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene("Title Screen");
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "dungeon")
+        {
+            if (GameObject.Find("OverworldSound").GetComponent<AudioSource>().isPlaying == false)
+            {
+                GameObject.Find("OverworldSound").GetComponent<AudioSource>().Play();
+            }
+            GameObject.Find("DungeonSound").GetComponent<AudioSource>().Stop();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "DialogueTrigger")
+        if (collision.gameObject.tag == "dungeon" && collision.gameObject.name != "startar")
+        {
+            if (GameObject.Find("DungeonSound").GetComponent<AudioSource>().isPlaying == false)
+            {
+                GameObject.Find("DungeonSound").GetComponent<AudioSource>().Play();
+            }
+            GameObject.Find("OverworldSound").GetComponent<AudioSource>().Stop();
+        }
+
+        if (collision.gameObject.tag == "DialogueTrigger")
         {
             collision.gameObject.GetComponent<DialogueTrigger>().TriggerDialogue();
         }
@@ -121,6 +161,7 @@ public class Player : MonoBehaviour
             //PlayerPrefs.SetInt("Stone Of Mana", 1);
             Destroy(collision.gameObject);
             GameObject.Find("Stone Gate").GetComponent<StoneGate>().Activate("mana");
+            FindObjectOfType<AudioManager>().Play("gem");
         }
 
         if (collision.gameObject.name == "Medal Of Life")
@@ -128,6 +169,7 @@ public class Player : MonoBehaviour
             //PlayerPrefs.SetInt("Medal Of Life", 1);
             Destroy(collision.gameObject);
             GameObject.Find("Stone Gate").GetComponent<StoneGate>().Activate("life");
+            FindObjectOfType<AudioManager>().Play("gem");
         }
 
         if (collision.gameObject.name == "Crystal Of Blood")
@@ -135,6 +177,7 @@ public class Player : MonoBehaviour
             //PlayerPrefs.SetInt("Crystal Of Blood", 1);
             Destroy(collision.gameObject);
             GameObject.Find("Stone Gate").GetComponent<StoneGate>().Activate("blood");
+            FindObjectOfType<AudioManager>().Play("gem");
         }
 
         if (collision.gameObject.name == "OpenBarsTrigger")
@@ -167,6 +210,7 @@ public class Player : MonoBehaviour
             {
                 Health.health -= 1;
                 Destroy(collision.gameObject);
+                FindObjectOfType<AudioManager>().Play("hurt");
             }
         }
     }

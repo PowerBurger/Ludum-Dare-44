@@ -19,7 +19,7 @@ public class StoneGate : MonoBehaviour
     {
         if(mana.activeSelf == true && life.activeSelf == true && blood.activeSelf == true)
         {
-            Destroy(gameObject);
+            GetComponent<Animator>().Play("open");
         }
     }
 

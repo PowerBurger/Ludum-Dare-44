@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreen : MonoBehaviour
 {
+    bool b;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,16 @@ public class TitleScreen : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            SceneManager.LoadScene("Game");
+            if (b == true)
+            {
+                SceneManager.LoadScene("Game");
+            }
+            if (b == false)
+            {
+                GameObject.Find("Main").GetComponent<Animator>().Play("main");
+                b = true;
+            }
+            
         }
     }
 }
