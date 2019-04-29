@@ -30,10 +30,10 @@ public class AudioManager : MonoBehaviour {
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s.pitchRandomRange != 0)
-        {
-            s.source.pitch = UnityEngine.Random.Range(s.pitch - (s.pitchRandomRange / 2), s.pitch + (s.pitchRandomRange / 2));
-        }
+        //if (s.pitchRandomRange != 0)
+        //{
+        //    s.source.pitch = UnityEngine.Random.Range(s.pitch - (s.pitchRandomRange / 2), s.pitch + (s.pitchRandomRange / 2));
+        //}
         s.source.Play();
     }
 }
